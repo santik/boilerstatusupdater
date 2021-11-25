@@ -1,14 +1,7 @@
 package domain
 
-import domain.ShotStatus.ShotStatus
-
-object ShotStatus extends Enumeration {
-  type ShotStatus = Value
-  val Success, Failure = Value
-}
+sealed trait ShotStatus
+final case object Success extends ShotStatus
+final case object Failure extends ShotStatus
 
 final case class Shot(location: Coordinate, status: ShotStatus)
-
-object Shot {
-  def generate: ShotBoard = ???
-}

@@ -1,10 +1,7 @@
 package domain
 
-import domain.DeckStatus.DeckStatus
-
-object DeckStatus extends Enumeration {
-  type DeckStatus = Value
-  val Shot, Alive = Value
-}
+sealed trait DeckStatus
+final case object Shot extends DeckStatus
+final case object Alive extends DeckStatus
 
 final case class Deck(coord: Coordinate, status: DeckStatus)
