@@ -41,13 +41,13 @@ final case class Ready(
                       ) extends Game
 
 object Ready {
-  def from(ready: Ready): Ready = {
+  def from(joined: Joined): Ready = {
     new Ready(
-      id = ready.id,
-      player1 = ready.player1,
-      player2 = ready.player2,
-      player1ShipBoard = ready.player1ShipBoard,
-      player2ShipBoard = ready.player2ShipBoard,
+      id = joined.id,
+      player1 = joined.player1,
+      player2 = joined.player2,
+      player1ShipBoard = joined.player1ShipBoard,
+      player2ShipBoard = joined.player2ShipBoard,
       player1ShotBoard = ShotBoard.generate,
       player2ShotBoard = ShotBoard.generate,
       turn = Player1
