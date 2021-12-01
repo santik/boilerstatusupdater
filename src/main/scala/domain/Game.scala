@@ -7,25 +7,24 @@ object GameId {
 }
 
 sealed trait GameTurn
-
 final case object Player1 extends GameTurn
 final case object Player2 extends GameTurn
 
 sealed trait Game
 
-final case class Initial(id: GameId, player1: Player, player1ShipBoard: ShipBoard) extends Game
+final case class InitialGame(id: GameId, player1: Player, player1ShipBoard: ShipBoard) extends Game
 
-object Initial {
-  def create(shipBoard: ShipBoard): Initial = {
-    new Initial(GameId.generate, Player.generate, shipBoard)
+object InitialGame {
+  def create(shipBoard: ShipBoard): InitialGame = {
+    new InitialGame(GameId.generate, Player.generate, shipBoard)
   }
 }
 
-final case class Joined(id: GameId, player1: Player, player2: Player, player1ShipBoard: ShipBoard, player2ShipBoard: ShipBoard) extends Game
+final case class JoinedGame(id: GameId, player1: Player, player2: Player, player1ShipBoard: ShipBoard, player2ShipBoard: ShipBoard) extends Game
 
-object Joined {
-  def from(initial: Initial, shipBoard: ShipBoard): Joined = {
-    new Joined(id = initial.id, player1 = initial.player1, player2 = Player.generate, player1ShipBoard = initial.player1ShipBoard, player2ShipBoard = shipBoard)
+object JoinedGame {
+  def from(initial: InitialGame, shipBoard: ShipBoard): JoinedGame = {
+    new JoinedGame(id = initial.id, player1 = initial.player1, player2 = Player.generate, player1ShipBoard = initial.player1ShipBoard, player2ShipBoard = shipBoard)
   }
 }
 
@@ -41,7 +40,7 @@ final case class Ready(
                       ) extends Game
 
 object Ready {
-  def from(joined: Joined): Ready = {
+  def from(joined: JoinedGame): Ready = {
     new Ready(
       id = joined.id,
       player1 = joined.player1,

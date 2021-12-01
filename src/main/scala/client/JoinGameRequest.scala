@@ -1,5 +1,5 @@
 package client
 
-final case class GameId(value: String) extends AnyVal
+import domain.ShipBoard
 
-final case class JoinGameRequest(gameId: GameId)
+final case class JoinGameRequest(gameId: GameId, board: ShipBoard)
